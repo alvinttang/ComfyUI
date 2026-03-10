@@ -773,7 +773,7 @@ async def _request_base(cfg: _RequestConfig, expect_binary: bool):
                                     cfg.node_cls, cfg.wait_label, int(now - start_time), cfg.estimated_total
                                 )
                     bytes_payload = bytes(buff)
-                    resp_headers = dict(resp.headers)
+                    resp_headers = {k.lower(): v for k, v in resp.headers.items()}
                     if cfg.price_extractor:
                         with contextlib.suppress(Exception):
                             extracted_price = cfg.price_extractor(resp_headers)
